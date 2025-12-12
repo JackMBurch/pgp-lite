@@ -10,6 +10,12 @@ You can try the latest version here:
 
 - [https://pgp.thumpy.org/](https://pgp.thumpy.org/)
 
+## Screenshots
+
+<img width="1972" height="1707" alt="image" src="https://github.com/user-attachments/assets/d181759e-3887-421a-89f4-00918848869e" />
+
+
+
 ## Features
 
 - **Single text area, dual mode**:
