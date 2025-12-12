@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PGP Lite - Client-side Encryptor</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1>PGP Lite</h1>
+        <p class="app__subtitle">
+          Client-side PGP encryption and decryption using your PGP keys.
+        </p>
+      </header>
+
+      <section class="card card--tight-top">
+        <details class="details">
+          <summary>Generate a new keypair (optional)</summary>
+          <div class="field-group">
+            <label class="field-label name-label" for="keyGenName">
+              Name
+            </label>
+            <input
+              id="keyGenName"
+              type="text"
+              class="field-input"
+              placeholder="Example: Jane Doe"
+            />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="keyGenEmail"> Email </label>
+            <input
+              id="keyGenEmail"
+              type="email"
+              class="field-input"
+              placeholder="Example: jane@example.com"
+            />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="keyGenPassphrase">
+              Passphrase for new private key (optional)
+            </label>
+            <input
+              id="keyGenPassphrase"
+              type="password"
+              class="field-input"
+              placeholder="Leave blank to create an unencrypted private key"
+              autocomplete="new-password"
+            />
+          </div>
+          <div class="field-group field-group--actions">
+            <button id="generateKeypairButton" class="button button--ghost">
+              Generate &amp; download keypair
+            </button>
+          </div>
+          <p id="keyGenStatus" class="status"></p>
+        </details>
+      </section>
+
+      <div class="app__keys-row">
+        <section class="card">
+          <h2 class="card__title">1. Choose public key</h2>
+          <div class="field-group">
+            <label class="field-label" for="keyModeSelect">Key source</label>
+            <select id="keyModeSelect" class="field-input">
+              <option value="default">Use default public key</option>
+              <option value="uploaded">Use selected public key file</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="publicKeyFile">
+              Select public key file (.asc)
+            </label>
+            <input
+              id="publicKeyFile"
+              type="file"
+              accept=".asc,.pgp,.gpg,.txt"
+              class="field-input"
+            />
+            <p id="uploadedKeyInfo" class="field-help">
+              No public key file selected yet. Files are read only in your
+              browser and never uploaded to a server.
+            </p>
+          </div>
+
+          <details class="details">
+            <summary>Show default public key (for reference)</summary>
+            <pre id="defaultKeyPreview" class="key-preview"></pre>
+          </details>
+        </section>
+
+        <section class="card">
+          <h2 class="card__title">2. Private key (Optional, for decryption)</h2>
+          <div class="field-group">
+            <label class="field-label" for="privateKeyFile">
+              Select private key file (.asc)
+            </label>
+            <input
+              id="privateKeyFile"
+              type="file"
+              accept=".asc,.pgp,.gpg,.txt"
+              class="field-input"
+            />
+            <p id="uploadedPrivateKeyInfo" class="field-help">
+              No private key file selected yet. Files are read only in your
+              browser and never uploaded to a server.
+            </p>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="privateKeyPassphrase">
+              Private key passphrase (if any)
+            </label>
+            <input
+              id="privateKeyPassphrase"
+              type="password"
+              class="field-input"
+              placeholder="Leave blank if your private key is not encrypted"
+              autocomplete="current-password"
+            />
+          </div>
+          <div class="field-group field-group--compact-bottom">
+            <label class="field-label field-label--inline">
+              <input id="rememberPassphraseCheckbox" type="checkbox" />
+              Save passphrase to this device (local storage)
+            </label>
+            <p class="field-help">
+              The passphrase is stored only in your browser's local storage and
+              never sent to any server.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <section class="card card--tight-footer">
+        <h2 class="card__title">3. Encrypt or decrypt text</h2>
+        <div class="field-group">
+          <label class="field-label" id="outputTitle" for="plaintextInput">
+            Text to encrypt / decrypted output
+          </label>
+          <textarea
+            id="plaintextInput"
+            class="field-input field-input--textarea"
+            placeholder="Type or paste text to encrypt, or paste an encrypted PGP message to decrypt..."
+          ></textarea>
+        </div>
+        <div class="field-group field-group--actions">
+          <button id="actionButton" class="button button--primary">
+            Encrypt
+          </button>
+          <button id="copyButton" class="button button--ghost">
+            Copy text
+          </button>
+        </div>
+        <p id="statusMessage" class="status"></p>
+      </section>
+
+      <footer class="app__footer">
+        <div class="app__footer-inner">
+          <p>
+            All encryption happens locally in your browser. No data is sent to
+            any server.
+            <br />
+            <a
+              class="app__footer-link"
+              href="https://github.com/JackMBurch/pgp-lite"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Source Code
+            </a>
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <script src="https://unpkg.com/openpgp@5/dist/openpgp.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
