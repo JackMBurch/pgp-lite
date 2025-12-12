@@ -4,6 +4,12 @@ Simple, static, vanilla JavaScript web app for encrypting text with PGP in the b
 
 Everything runs entirely client-side using OpenPGP.js loaded from a CDN.
 
+## Live demo
+
+You can try the latest version here:
+
+- [https://pgp.thumpy.org/](https://pgp.thumpy.org/)
+
 ## Features
 
 - **Single text area, dual mode**:
