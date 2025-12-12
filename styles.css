@@ -9,7 +9,6 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-y: scroll;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     sans-serif;
   background-color: #020617;
@@ -18,6 +17,10 @@ body {
   background-position: top center;
   background-attachment: fixed;
   color: #e5e7eb;
+}
+
+html {
+  overflow-y: scroll;
 }
 
 body {
